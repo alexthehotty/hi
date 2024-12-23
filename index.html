@@ -117,7 +117,7 @@
             });
 
             try {
-                const response = await fetch(url, { method: 'GET' });
+                const response = await fetch(url, { method: 'POST' });
                 if (response.ok) {
                     showNotification("Sent successfully!", "success");
                 } else {

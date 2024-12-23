@@ -1,0 +1,29 @@
+[debug] [2024-12-23T05:12:52.490Z] ----------------------------------------------------------------------
+[debug] [2024-12-23T05:12:52.495Z] Command:       /usr/bin/node /usr/local/bin/firebase init
+[debug] [2024-12-23T05:12:52.496Z] CLI Version:   13.29.1
+[debug] [2024-12-23T05:12:52.497Z] Platform:      linux
+[debug] [2024-12-23T05:12:52.497Z] Node Version:  v18.19.1
+[debug] [2024-12-23T05:12:52.498Z] Time:          Sun Dec 22 2024 22:12:52 GMT-0700 (Mountain Standard Time)
+[debug] [2024-12-23T05:12:52.499Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-12-23T05:12:52.513Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-12-23T05:12:52.515Z] > authorizing via signed-in user (slutty.alexasmith@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /home/alexler/Documents/hi
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[info] i  If you want to create a project in a Google Cloud organization or folder, please use "firebase projects:create" instead, and return to this command when you've created the project. 

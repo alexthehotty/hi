@@ -1,1 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alexa's macros</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
 
+        h2 {
+            color: #000000;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background: #fff;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input, textarea, button {
+            width: 100%;
+            padding: 5px;
+            margin: 8px 0 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:disabled {
+            background-color: #9E9E9E;
+            cursor: not-allowed;
+        }
+
+        .notification {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .notification.success {
+            background-color: #4CAF50;
+        }
+
+        .notification.error {
+            background-color: #f44336;
+        }
+
+        .notification.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+    <script>
+        function showNotification(message, type) {
+            const notification = document.createElement("div");
+            notification.classList.add("notification", type, "visible");
+            notification.textContent = message;
+
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.classList.remove("visible");
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        async function sendForm(event, baseUrl, formData, button) {
+            event.preventDefault();
+
+            button.disabled = true;
+            button.textContent = "Sending...";
+
+            setTimeout(() => {
+                button.disabled = false;
+                button.textContent = "Send";
+            }, 3000);
+
+            const url = new URL(baseUrl);
+            formData.forEach((value, key) => {
+                url.searchParams.append(key, value);
+            });
+
+            try {
+                const response = await fetch(url, { method: 'GET' });
+                if (response.ok) {
+                    showNotification("Sent successfully!", "success");
+                } else {
+                    showNotification("Error occurred. Please try again.", "error");
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                showNotification("Network error. Please check your connection.", "error");
+            }
+        }
+
+        function handleFormSubmit(event, formId, baseUrl) {
+            const form = document.getElementById(formId);
+            const button = form.querySelector("button[type='submit']");
+            const formData = new FormData(form);
+            sendForm(event, baseUrl, formData, button);
+        }
+
+        function handleEmailSubmit(event) {
+            handleFormSubmit(event, "emailForm", "https://trigger.macrodroid.com/");
+        }
+
+        function handleTextSubmit(event) {
+            handleFormSubmit(event, "textForm", "https://trigger.macrodroid.com/4c77142b-42ac-49bd-ac61-fbf0b874fb10/Tellme");
+        }
+
+        function handleLinkSubmit(event) {
+            handleFormSubmit(event, "linkForm", "https://trigger.macrodroid.com/4c77142b-42ac-49bd-ac61-fbf0b874fb10/paradroid");
+        }
+
+        function handleImageTriggerSubmit(event) {
+            handleFormSubmit(event, "imageTriggerForm", "https://trigger.macrodroid.com/4c77142b-42ac-49bd-ac61-fbf0b874fb10/claimer");
+        }
+    </script>
+</head>
+<body>
+    <h2>Alexa's macros</h2>
+
+    <form id="emailForm" onsubmit="handleEmailSubmit(event)">
+        <label for="email">Enter email to receive screenshot: (Only works if my phone is unlocked)</label>
+        <input type="email" id="email" name="Mail" required>
+        <button type="submit">Send</button>
+    </form>
+
+    <form id="textForm" onsubmit="handleTextSubmit(event)">
+        <label for="text">Enter the text to send:</label>
+        <textarea id="text" name="text" rows="5" cols="40" required></textarea>
+        <button type="submit">Send</button>
+    </form>
+
+    <form id="linkForm" onsubmit="handleLinkSubmit(event)">
+        <label for="link">Enter the link to send:</label>
+        <input type="url" id="link" name="Paradroid link" placeholder="https://example.com" required>
+        <button type="submit">Send</button>
+    </form>
+
+    <form id="imageTriggerForm" onsubmit="handleImageTriggerSubmit(event)">
+        <label for="imageUrl">Enter the URL of the image to claim:</label>
+        <input type="url" id="imageUrl" name="Pics" placeholder="https://example.com/image.jpg" required>
+        <label for="userName">Enter your username in ScreenClaim:</label>
+        <input type="text" id="userName" name="Name_Pics" placeholder="Username" required>
+        <button type="submit">Send</button>
+    </form>
+</body>
+</html>

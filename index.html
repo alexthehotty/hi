@@ -154,6 +154,7 @@
     </script>
 </head>
 <body>
+    
     <h2>Alexa's macros</h2>
 
     <form id="emailForm" onsubmit="handleEmailSubmit(event)">
@@ -181,5 +182,29 @@
         <input type="text" id="userName" name="Name_Pics" placeholder="Username" required>
         <button type="submit">Send</button>
     </form>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyBIHgT_yaws8_V59n2BSay6t_7kK-CBBjA",
+          authDomain: "test-49450.firebaseapp.com",
+          projectId: "test-49450",
+          storageBucket: "test-49450.firebasestorage.app",
+          messagingSenderId: "275061054541",
+          appId: "1:275061054541:web:f45ed9e68e4d578a841004",
+          measurementId: "G-8ZDPF07XHT"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+      </script>
 </body>
 </html>
